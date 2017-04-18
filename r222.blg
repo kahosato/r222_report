@@ -3,44 +3,52 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: r222.aux
 The style file: plainnat.bst
 Database file #1: r222.bib
-You've used 2 entries,
+Warning--empty journal in jarvis2013maximizing
+Warning--empty school in kochmar2011identification
+Warning--empty booktitle in nicholls2003cambridge
+Warning--empty year in nicholls2003cambridge
+Warning--empty year in nicholls2003cambridge
+Warning--empty booktitle in tetreault2013report
+Warning--empty journal in yarowsky2013learning
+You've used 21 entries,
             2773 wiz_defined-function locations,
-            604 strings with 5268 characters,
-and the built_in function-call counts, 1341 in all, are:
-= -- 125
-> -- 69
-< -- 3
-+ -- 23
-- -- 21
-* -- 96
-:= -- 188
-add.period$ -- 7
-call.type$ -- 2
-change.case$ -- 13
-chr.to.int$ -- 2
-cite$ -- 4
-duplicate$ -- 65
-empty$ -- 108
-format.name$ -- 25
-if$ -- 298
+            695 strings with 8909 characters,
+and the built_in function-call counts, 11246 in all, are:
+= -- 1045
+> -- 579
+< -- 23
++ -- 195
+- -- 174
+* -- 807
+:= -- 1599
+add.period$ -- 72
+call.type$ -- 21
+change.case$ -- 120
+chr.to.int$ -- 21
+cite$ -- 49
+duplicate$ -- 581
+empty$ -- 955
+format.name$ -- 209
+if$ -- 2496
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 2
-newline$ -- 18
-num.names$ -- 8
-pop$ -- 32
+missing$ -- 20
+newline$ -- 112
+num.names$ -- 84
+pop$ -- 303
 preamble$ -- 1
-purify$ -- 11
+purify$ -- 100
 quote$ -- 0
-skip$ -- 58
+skip$ -- 460
 stack$ -- 0
-substring$ -- 68
-swap$ -- 22
-text.length$ -- 2
+substring$ -- 444
+swap$ -- 144
+text.length$ -- 13
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 22
-warning$ -- 0
-while$ -- 12
+type$ -- 231
+warning$ -- 7
+while$ -- 102
 width$ -- 0
-write$ -- 34
+write$ -- 277
+(There were 7 warnings)
