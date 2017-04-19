@@ -1,9 +1,10 @@
 We use a subset of the Cambridge Learner Corpus \citep{nicholls2003cambridge} (CLC).
-CLC is a corpus which consists of scripts produced by learners with 86 different L1 for examinations provided by Cambridge English Language Assessment.
-Each documents is annotated with basic information of the author, such as their L1 and age, making it an appropriate corpus for the task of author profiling.
+CLC is a corpus which consists of scripts produced by learners with 86 different L1 for various Cambridge English Language Assessment examinations.
+Each document is annotated with basic information of the author, such as their L1 and age, making CLC appropriate corpus for author profiling.
 
-We use a subset of the CLC FCE Dataset\cite{yannakoudakis2011new} as a test set, as it is publicly available.
+We use a subset of the public available CLC FCE Dataset \citep{yannakoudakis2011new} as a test set.
 This contains 1244 scripts, each containing two answers, produced by learners with 16 different L1 for the Cambridge ESOL First Certificate in English (FCE) examination in 2010 and 2011.
+
 Table \ref{tab:l1-fce} shows the number of scripts for each L1.
 \begin{table}[]
 \centering
@@ -34,16 +35,15 @@ We extracted scripts produced by Japanese, Russian and Italian native speakers t
 (Recall that each script contains two answers.)
 We chose these three languages for two reasons;
 Firstly, the number of the scripts available for each language is fairly even.
-Secondly, they belong to the different language family, which should make the classification more manageable.
-
-We selected 3000 answers from the CLC, 1000 for each L1, for the training set.
+Secondly, they belong to separate language families, which should make the classification more manageable.
+We selected 3000 answers from the CLC, 1000 for each L1, to build a training set.
 
 The level of proficiency is another variable that influences the writing of a learner, and therefore may introduce an undesirable bias.
 Each Cambridge ESOL examination expects a certain level of proficiency from the candidates.
-The reference level is provided by Common European Framework of Reference for Languages (CEFR) \citep{council2001common} and FCE is aimed for learners at CEFR level B (i.e. independent user).
-In the training set, for each language, there are 250 scripts by learners at CEFR level A and C (i.e. basic and proficient user, respectively), and 500 scripts by learners at CEFR level B.
-We decided to have more scripts by learners at CEFR level B assimilate the training set to the test set.
-It is also reasonable to assume that there are more independent users than basic or proficient users.
+The reference levels are provided by Common European Framework of Reference for Languages (CEFR) \citep{council2001common} and FCE is aimed for learners at CEFR level B (i.e. independent user).
+For the training set, for each language, we selected 250 answers by learners at CEFR level A and C (i.e. basic and proficient user, respectively), and 500 answers by learners at CEFR level B.
+We included more answers produced by learners at CEFR level B in order to assimilate the training set to the test set.
+Besides, it is reasonable to assume that there are more independent users than basic or proficient users.
 
 Table \ref{tab:tr-stat} and \ref{tab:te-stat} gives the statistic of the length of the documents in terms of character in training and test set respectively.
 As can be seen, there is a much larger variance in training set than in test set.
@@ -74,3 +74,6 @@ Average & 1099    \\ \hline
 Standard Deviation    & 186.8    \\ \hline
 \end{tabular}
 \end{table}
+
+From the training set, we took 300 examples to create a validation set.
+This was used to see the number of epochs

@@ -31,9 +31,11 @@ This is potentially problematic with the dataset we have.
 As shown in \color{red} CREATE TABLE AND REFERENCE HERE \color{black}, majority of the documents in the training set is significantly shorter than 1014 characters.
 Though pooling should help the model to be invariant to the location of a feature, having majority of the training examples padded extensively might be harmful.
 
-To partially mitigate the problem of small dataset and short documents, instead of taking the first 1014 characters, we take a window of smaller size at an arbitrary location.
-For instance, given a document of length 1000 and a window size $l_w = 100$, a CNN may sample 100 characters at 900 different locations, effectively creating 900 samples.
+To partially mitigate the problem of small dataset and short documents, during the training, instead of feeding the first 1014 characters of the document to the model, we take a window of smaller size at an arbitrary location.
+For instance, given a document of length 1000 and a window size $l_w = 100$, a CNN may sample 100 characters at 900 different locations, effectively creating 900 different examples.
 In this report, we refer to this approach as \emph{random window sampling}.
+For testing, we take the window of the same size at the beginning of the document for an easier comparison of the results.
+
 We experiment with $l_w \in \{123, 339, 555, 771, 1014\}$.
 Note that these numbers are chosen as they are compatible with the architecture.
 \subsection{Architecture}
@@ -43,7 +45,7 @@ Note that these numbers are chosen as they are compatible with the architecture.
 \label{fig:architecture}
 \end{figure*}
 
-Figure \ref{fig:architecture} gives an illustration of the model described in \citep{zhang2015character}.
+Figure \ref{fig:architecture} gives an illustration of the model described in \citep{zhang2015character}, which we use without modification.
 The CNN consists of 6 convolutional, and 3 fully-connected layers.
 The kernel described in Section \ref{sub:conv} is applied with stride 1.
 The activation function used is a threshold function $th$ defined as follows:
@@ -78,3 +80,5 @@ This defines a set of possible window sizes $l_w$.
 
 Between the fully-connected layers, dropout modules \citep{hinton2012improving} with dropout probability of 0.5 are used for regularisation.
 Seventh and eighth layer have 1024 output units, and ninth layer have three as this is applied to three-class classification.
+
+At each epoch, a minibatch of size 128, chosen randomly from the training set, is used to update the weight with stochastic gradient decent \citep{polyak1964some} with momentum \citep{sutskever2013importance} 0.9 and step size 0.01.

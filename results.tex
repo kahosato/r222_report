@@ -1,0 +1,54 @@
+
+\begin{table*}[]
+\centering
+\caption{Error Rate of Models with Input Size 1014}
+\label{tab:1014}
+\begin{tabular}{cccc}
+& Random Window Sampling & Augmentation  & Error Rate \\ \hline
+(A)& No                     & Yes                & 0.628      \\
+(B)& No                     & No                 & \color{red}0.664\color{black}      \\
+(C)& Yes                    & No                 & \color{red}0.638\color{black}     
+\end{tabular}
+\end{table*}
+\color{red}No Yes ?\color{black}
+Table \ref{tab:1014} shows the error rate of the CNN with the input size 1014.
+Model (A) is the unmodified implementation described in \citep{zhang2015character}.
+As described in Section \ref{sub:input}, we modify the implementation in two ways; one is applying the random window sampling, and the other is switching off the data augmentation using a thesaurus.
+
+All the models perform better than a simple baseline system which chooses the label arbitrary whose error rate would be $0.667$, though only by small margin.
+As can be seen in the table, (C) outperforms both (A) and (B), showing the effectiveness of the two modifications.
+As stated previously, this CNN is shown effective for sentiment analysis and topic categorisation \citep{zhang2015character}.
+
+We argue that random window sampling is an effective method for this task.
+In \citep{zhang2015character}, the types of documents treated are reviews or articles, and the first part of these documents tend to be more informative about the overall content which is the objective of the network.
+Using only the start of the document therefore means less noise in the training data for the problems discussed in \citep{zhang2015character}.
+However, in the context of NLI, there is no clear relation between the informative features and the locations.
+Therefore it could be useful to augment the small dataset with random window sampling, rather than discarding a possibly useful information which may be contained in the later part of the training example.
+
+A possible explanation of (A) performing better than (B) is that augmentation using thesaurus helps generalise the bias introduced by using only the first part of the document.
+The bias may be related to the topic of the document or to the format that the exam prompt asks for.
+There is an imbalance in the exams taken by native speakers of each language, and therefore there may be a prompt on a certain topic or asks for a certain format which was chosen more frequently by a learners of a certain L1. 
+Clearly, if a network learns to classify based on the topic or the format, it would not generalise and perform poorly on the test set.
+As mentioned previously, the first part of the document may contain more information about the topic, and it possibly is more affected by the format.
+For instance, there are many documents which are in the format of a letter.
+These always start with a greeting (e.g. Dear ...), and if there are more of such documents are present for a certain L1, the network may associate the greeting with this L1, which would not generalise.
+
+\begin{table}[]
+\centering
+\caption{Error Rate of Models with Random Window Sampling}
+\label{tab:r_w_s}
+\begin{tabular}{ccc}
+&Input Size & Error Rate \\ \hline
+(D)&123        & 0.578      \\
+(E)&339        & 0.632      \\
+(F)&555        & 0.654      \\
+(G)&771        & 0.682      \\
+(C)&1014       & \color{red}0.638\color{black}    
+\end{tabular}
+\end{table}
+Table \ref{tab:r_w_s} shows the result for a different window size.
+Again, all the models except for (G) perform better than the simple baseline system only by small margin.
+
+
+The larger window size:  more information
+The smaller window size: less padding, training data more similar to the test data (median of the training data is about 350, so even with the model E half of them would have some padding) 
