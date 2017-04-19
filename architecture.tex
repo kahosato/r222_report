@@ -16,7 +16,7 @@ If a character in a document is not present in the alphabet, it is encoded to an
 Note that a whitespace is not part of the alphabet and therefore is also encoded to an all-zero vector.
 
 \cite{zhang2015character} perform a data augmentation in order to avoid the generalisation error.
-Specifically, they use an English thesaurus which is based on WordNet\color{red}cite\color{black} and replace words in the document to create a ``new'' example.
+Specifically, they use an English thesaurus which is based on WordNet \cite{fellbaum1998wordnet} and replace words in the document to create a ``new'' example.
 The number of words to be replaced and the index of the synonym used is chosen probabilistically.
 This data augmentation technique is appropriate if the task is to classify the documents according to its semantics.
 Indeed, the text classification tasks that \cite{zhang2015character} use this CNN for are sentiment analysis and topic classification.
@@ -28,7 +28,7 @@ To preserve such distinguishing features in the data, we turned off the data aug
 
 In \citep{zhang2015character}, the first 1014 characters are taken from each document and encoded to be used as an input.
 This is potentially problematic with the dataset we have.
-As shown in \color{red} CREATE TABLE AND REFERENCE HERE \color{black}, majority of the documents in the training set is significantly shorter than 1014 characters.
+As shown in Table \ref{tab:tr-stat}, majority of the documents in the training set is significantly shorter than 1014 characters.
 Though pooling should help the model to be invariant to the location of a feature, having majority of the training examples padded extensively might be harmful.
 
 To partially mitigate the problem of small dataset and short documents, during the training, instead of feeding the first 1014 characters of the document to the model, we take a window of smaller size at an arbitrary location.
