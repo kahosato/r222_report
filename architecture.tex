@@ -3,8 +3,8 @@ The implementation is based on Torch \citep{torch} and available online\footnote
 In this section, we describe their design and the modifications we experimented with.
 \subsection{Input}
 \label{sub:input}
-We first need to encode documents to a fixed sized sequence of vectors, so it can be fed to the temporal convolutional module introduced in Section \ref{sec:background}.
-\cite{zhang2015character} does this by lowercasing the document, and mapping each character to a one-hot vector.
+We first need to encode documents to a fixed sized sequence of vectors, so it can be fed to the temporal convolutional module described in Section \ref{sec:background}.
+\cite{zhang2015character} do this by lowercasing the document, and mapping each character to a one-hot vector.
 The alphabet used in our experiment is the same as in \citep{zhang2015character} and is 
 \begin{verbatim}
 abcdefghijklmnopqrstuvwxyz
@@ -15,13 +15,13 @@ As the alphabet consists of 70 characters, each document is transformed into a s
 If a character in a document is not present in the alphabet, it is encoded to an all-zero vector.
 Note that a whitespace is not part of the alphabet and therefore is also encoded to an all-zero vector.
 
-\citep{zhang2015character} performs a data augmentation in order to avoid the generalisation error.
+\cite{zhang2015character} perform a data augmentation in order to avoid the generalisation error.
 Specifically, they use an English thesaurus which is based on WordNet\color{red}cite\color{black} and replace words in the document to create a ``new'' example.
 The number of words to be replaced and the index of the synonym used is chosen probabilistically.
 This data augmentation technique is appropriate if the task is to classify the documents according to its semantics.
-Indeed, the text classification tasks that \cite{zhang2015character} uses this CNN for are sentiment analysis and topic classification.
+Indeed, the text classification tasks that \cite{zhang2015character} use this CNN for are sentiment analysis and topic classification.
 Though the dataset we have is small and a data augmentation would have been useful, it was expected that this particular technique would introduce an undesirable noise in training for author profiling, as word choice is a crucial cue for the attributes of the author, especially their L1.
-\citep{yarowsky2013learning} shows that the frequency distribution of words used in a corpus of computational linguistics articles from the ACL Anthology varies greatly from L1 to L1 of the author.
+\cite{yarowsky2013learning} shows that the frequency distribution of words used in a corpus of computational linguistics articles from the ACL Anthology varies greatly from L1 to L1 of the author.
 For instance, a word ``claim'' is much less often used by Chinese native speakers than native speakers of other languages, and ``complementary'' is more frequently used by French or Spanish native speakers.
 The latter can potentially be explained by the latin origin of the word.
 To preserve such distinguishing features in the data, we turned off the data augmentation.
