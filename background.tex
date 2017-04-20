@@ -1,0 +1,18 @@
+In this report, we assume the knowledge of the material covered in the lecture, namely the overview of convolutional networks.
+
+In this section we describe the \emph{temporal convolution}.
+When a CNN takes images as an input, the convolution is applied in two dimension.
+Let the dimension of the input layer to be $m_i \times n_i$.
+In two dimensional convolution, the size of kernel, say $m_k \times n_k$ is such that $m_k < m_i$ and $n_k < n_i$, and the kernel is ``moved'' to both directions.
+
+In temporal convolution, which is often used in natural language processing, the convolution is applied in a single dimension.
+Each feature, a character in this report, is represented as a vector of length $m_i$ and $n_i$ of them constitute the input.
+In one dimensional convolution, the size of kernel is such that $m_k = m_i$ and the kernel is moved along the column.
+
+Let $g(x)$ a function which takes an index in the input $x \in [1, n_i]$ and returns the $x$th feature in the input, and $f(x)$ a function which takes an index in the kernel $x \in [1, n_k]$ and returns the weight applied to the $x$th element.
+Let $d$ be the stride.
+Then the temporal convolution can be expressed as the following function $h(y)$, which returns the result of $y$th convolution \citep{zhang2015character}:
+\begin{align*}
+h(y) = \sum_{x=1}^{n_k} f(x) \cdot g(y \cdot d - x + c)
+\end{align*}
+where $c = n_k - d + 1$ is an offset constant.

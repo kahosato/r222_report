@@ -5,21 +5,23 @@
 \label{tab:1014}
 \begin{tabular}{cccc}
 & Random Window Sampling & Augmentation  & Error Rate \\ \hline
-(A)& No                     & Yes                & 0.628      \\
-(B)& No                     & No                 & \color{red}0.664\color{black}      \\
-(C)& Yes                    & No                 & \color{red}0.608\color{black}     
+(A)& No                     & Yes                & 0.648      \\
+(B)& No                     & No                 &0.664     \\
+(C)& Yes                     & Yes                &  0.640    \\
+(D)& Yes                    & No                 & 0.626
 \end{tabular}
 \end{table*}
-\color{red}No Yes ?\color{black}
 Table \ref{tab:1014} shows the error rate of the CNN with the input size 1014.
 Model (A) is the unmodified implementation described in \citep{zhang2015character}.
 As described in Section \ref{sub:input}, we modify the implementation in two ways; one is applying the random window sampling, and the other is switching off the data augmentation using a thesaurus.
 
-All the models perform better than a simple baseline system which chooses the label arbitrary whose error rate would be $0.667$, though only by small margin.
-As can be seen in the table, (C) outperforms both (A) and (B), showing the effectiveness of the two modifications.
+The error rate of a simple baseline system which chooses the label arbitrarily is $0.667$. 
+All the models perform better than the baseline though only by a small margin.
+
+As can be seen in the table, (D) outperforms all the other models, showing the effectiveness of the two modifications.
 As stated previously, this CNN is shown effective for sentiment analysis and topic categorisation \citep{zhang2015character}.
 
-We argue that random window sampling is an effective method for this task.
+We argue that random window sampling is an effective data augmentation method for this task.
 In \citep{zhang2015character}, the types of documents treated are reviews or articles, and the first part of these documents tend to be more informative about the overall content which is the objective of the network.
 Using only the start of the document therefore means less noise in the training data for the problems discussed in \citep{zhang2015character}.
 However, in the context of NLI, there is no clear relation between the informative features and the locations.
@@ -43,12 +45,38 @@ These always start with a greeting (e.g. Dear ...), and if there are more of suc
 (E)&339        & 0.632      \\
 (F)&555        & 0.654      \\
 (G)&771        & 0.682      \\
-(C)&1014       & \color{red}0.608\color{black}    
+(C)&1014       & 0.626    
+\end{tabular}
+\end{table}
+\begin{table}[]
+\centering
+\caption{Proportion of Examples with Padding}
+\label{tab:padding}
+\begin{tabular}{ccc}
+Input Size & Training & Test \\ \hline
+123        & 1.20\%  &   0\% \\
+339        & 46.5\%    & 0\%\\
+555        & 58.5\%    & 0\% \\
+771        & 68.7\%     &2.5\% \\
+1014       & 74.3\%    &33.6\%
 \end{tabular}
 \end{table}
 Table \ref{tab:r_w_s} shows the result for a different window size.
 Again, all the models except for (G) perform better than the simple baseline system only by small margin.
 
+Interestingly, the best performances were achieved with the smallest and the largest window size.
+This suggests that there is a trade-off between a small and a large window.
+Intuitively, having a large window would mean that the network is fed with more information, which is beneficial.
+It, however, also means that the network is fed with more padding.
+Table \ref{tab:padding} shows the proportion of examples which are padded in each dataset.
+As can be seen, with a window size larger than 123, a large proportion of the training set is padded.
+Though the padding itself potentially introduces some noise, it affected the network less with the window size 1014, perhaps because also many examples in the test set was padded.
+As a future work, one may filter short examples which require padding from training set and see whether the performance improves.
 
-The larger window size:  more information
-The smaller window size: less padding, training data more similar to the test data (median of the training data is about 350, so even with the model E half of them would have some padding) 
+A possible explanation to a large difference between the performance of the CNN applied to this task and the tasks introduced in \citep{zhang2015character} is the size of dataset.
+The smallest dataset \cite{zhang2015character} experiment with consists of 120k training examples equally split between four classes, which is significantly larger than our dataset.
+\cite{zhang2015character} also states that convolutional networks, especially when learning from low-level raw features (i.e. characters).
+On the contrary, \cite{stab2017recognizing} uses a convolutional network to classify arguments as sufficient or not.
+With just over 1000 examples, the error rate of their network is $0.157 \pm 0.025$, which is much lower than that of the majority baseline, which is $0.338 \pm 0.033$.
+This network takes word embeddings produced with word2vec \citep{mikolov2013distributed}.
+Though lexical features are not considered to be appropriate for the task of NLI as stated previously, for a future work it may be worth investigating the use of word-based CNN for NLI.

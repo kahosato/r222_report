@@ -13,7 +13,7 @@ A writing tutor system can first used NLI, and use the detected L1 to have an im
 
 There have been many works on NLI.
 Early works in NLI \citep{koppel2005determining, tsur2007using} showed the effectiveness of Support Vector Machine (SVM) in this task.
-SVM continues to be the popular choice, and 13 out of 24 participating teams, including the winning team  \citep{jarvis2013maximizing} in the Native Language Identification Shared Task  \citep{tetreault2013report} utilised SVM.
+SVM continues to be the popular choice, and 13 out of 24 participating teams, including the winning team  \citep{jarvis2013maximizing} in the First Native Language Identification Shared Task  \citep{tetreault2013report} utilised SVM.
 The difference among these works comes down to the feature sets used, which range from lexical n-grams \citep{koppel2005determining, tsur2007using, jarvis2013maximizing} to fragments of Tree Substitutional Grammar  \citep{swanson2012native}.
 In other words, feature engineering has been a large focus of NLI.
 
@@ -32,4 +32,4 @@ To partially mitigate these problems, we use a smaller window and sample a secti
 The results show that CNN performs better with a small window size.
 However, the performance still does not match that of SVM.
 
-The remaining of the report proceeds as follows; \color{red} FINISH \color{black}
+The remaining of the report proceeds as follows; Section 2 briefly discusses the previous works in NLI; Section 3 introduces the convolution used in the CNN we experiment with; Section 4 discusses the dataset we perform NLI on; Section 5 describes the design of the CNN by \cite{zhang2015character} and the modification we apply; Section 6 presents the results and attempts to analyse them; Finally, Section 7 gives a brief summary of the report.

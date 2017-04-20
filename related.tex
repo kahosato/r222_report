@@ -1,0 +1,19 @@
+The first work in NLI that we are aware of is that of \cite{koppel2005determining}.
+They used SVM to perform five-class classification between Russian, Czech, Bulgarian, French and Spanish.
+The features they extracted include stylistic features such as function words, character n-grams and grammatical errors.
+They report an accuracy of 80.2\%.
+\cite{tsur2007using} performs the exact same task using SVM and investigates the effect of each features used.
+\cite{wong2011exploiting} experiment with substructures of a parse tree as features, and achieve the accuracy of 80\% in seven-class classification.
+\cite{swanson2012native} used fragments of Tree Substitutional Grammar.
+
+Aside from SVM, Latent Dirichlet Analysis was applied to NLI with seven languages by \cite{dras2011topic}.
+This gave the accuracy of 56.9 \%, which was lower than the accuracy that their baseline SVM gave, which was 64.1\%.
+All the works mentioned up to this point uses the ICLE corpus \citep{granger2002international}.
+In 2013, the First Native Language Identification Shared Task was held \citep{tetreault2013report}.
+The task was to perform NLI on a new TOEFL11 corpus \citep{tetreault2013report} which included essays written by native speakers of 11 languages.
+
+As mentioned previously, the majority, including the winning team  \citep{jarvis2013maximizing}, utilised SVM.
+\cite{jarvis2013maximizing} achieves the accuracy of 83.6\%.
+
+The other approaches seen in the shared task include MaxEnt, Ensemble and Discriminant Function Analysis \citep{tetreault2013report}.
+

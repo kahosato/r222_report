@@ -6,47 +6,48 @@ Database file #1: r222.bib
 Warning--empty journal in jarvis2013maximizing
 Warning--empty school in kochmar2011identification
 Warning--empty booktitle in nicholls2003cambridge
+Warning--empty journal in stab2017recognizing
 Warning--empty booktitle in tetreault2013report
 Warning--empty journal in yarowsky2013learning
-You've used 36 entries,
+You've used 40 entries,
             2773 wiz_defined-function locations,
-            783 strings with 11699 characters,
-and the built_in function-call counts, 18662 in all, are:
-= -- 1696
-> -- 1029
-< -- 35
-+ -- 349
-- -- 312
-* -- 1398
-:= -- 2725
-add.period$ -- 118
-call.type$ -- 36
-change.case$ -- 207
-chr.to.int$ -- 35
-cite$ -- 77
-duplicate$ -- 925
-empty$ -- 1551
-format.name$ -- 370
-if$ -- 4059
+            800 strings with 12318 characters,
+and the built_in function-call counts, 20865 in all, are:
+= -- 1895
+> -- 1158
+< -- 39
++ -- 392
+- -- 351
+* -- 1559
+:= -- 3041
+add.period$ -- 131
+call.type$ -- 40
+change.case$ -- 231
+chr.to.int$ -- 39
+cite$ -- 86
+duplicate$ -- 1034
+empty$ -- 1727
+format.name$ -- 417
+if$ -- 4543
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 38
-newline$ -- 188
-num.names$ -- 144
-pop$ -- 488
+missing$ -- 43
+newline$ -- 208
+num.names$ -- 160
+pop$ -- 549
 preamble$ -- 1
-purify$ -- 175
+purify$ -- 196
 quote$ -- 0
-skip$ -- 737
+skip$ -- 831
 stack$ -- 0
-substring$ -- 730
-swap$ -- 196
-text.length$ -- 17
+substring$ -- 818
+swap$ -- 223
+text.length$ -- 19
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 381
-warning$ -- 5
-while$ -- 168
+type$ -- 420
+warning$ -- 6
+while$ -- 186
 width$ -- 0
-write$ -- 469
-(There were 5 warnings)
+write$ -- 519
+(There were 6 warnings)
