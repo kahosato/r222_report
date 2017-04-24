@@ -2,10 +2,10 @@ We use a subset of the Cambridge Learner Corpus \citep{nicholls2003cambridge} (C
 CLC is a corpus which consists of scripts produced by learners with 86 different L1 for various Cambridge English Language Assessment examinations.
 Each document is annotated with basic information of the author, such as their L1 and age, making CLC appropriate corpus for author profiling.
 
-We use a subset of the public available CLC FCE Dataset \citep{yannakoudakis2011new} as a test set.
+In particular, we use a subset of the publicly available CLC FCE Dataset \citep{yannakoudakis2011new} as a test set.
 This contains 1244 scripts, each containing two answers, produced by learners with 16 different L1 for the Cambridge ESOL First Certificate in English (FCE) examination in 2010 and 2011.
 
-Table \ref{tab:l1-fce} shows the number of scripts for each L1.
+Table \ref{tab:l1-fce} shows the number of scripts for each L1 in the CLC FCE Dataset.
 \begin{table}[]
 \centering
 \caption{Distribution of L1 in the CLC FCE Dataset}
@@ -31,24 +31,23 @@ French     & 146   \\ \hline
 Spanish    & 200   \\ \hline
 \end{tabular}
 \end{table}
-We extracted scripts produced by Japanese, Russian and Italian native speakers to create a test set of 476 examples.
-(Recall that each script contains two answers.)
+We extracted scripts produced by Japanese, Russian, and Italian native speakers to create a test set of 476 examples (Recall that each script contains two answers).
 We chose these three languages for two reasons;
 Firstly, the number of the scripts available for each language is fairly even.
-Secondly, they belong to separate language families, which should make the classification more manageable.
+Secondly, they belong to the separate language families, which should make the classification more manageable.
 We selected 3000 answers from the CLC, 1000 for each L1, to build a training set.
 
-The level of proficiency is another variable that influences the writing of a learner, and therefore may introduce an undesirable bias.
+The level of proficiency is another variable that influences the writing of a learner, and this may introduce an undesirable bias.
 Each Cambridge ESOL examination expects a certain level of proficiency from the candidates.
-The reference levels are provided by Common European Framework of Reference for Languages (CEFR) \citep{council2001common} and FCE is aimed for learners at CEFR level B (i.e. independent user).
-For the training set, for each language, we selected 250 answers by learners at CEFR level A and C (i.e. basic and proficient user, respectively), and 500 answers by learners at CEFR level B.
+The reference levels are provided by Common European Framework of Reference for Languages (CEFR) \citep{council2001common}, and FCE is aimed for learners at CEFR level B (i.e. independent user).
+For the training set, for each language, we selected 250 answers by learners at CEFR level A and C (i.e. basic and proficient user, respectively) and 500 answers by learners at CEFR level B.
 We included more answers produced by learners at CEFR level B in order to assimilate the training set to the test set.
 Besides, it is reasonable to assume that there are more independent users than basic or proficient users.
 
-Table \ref{tab:tr-stat} and \ref{tab:te-stat} gives the statistic of the length of the documents in terms of character in training and test set respectively.
-As can be seen, there is a much larger variance in training set than in test set.
-This is due to the fact that the training set contains answers for 15 different exams, where the expected length of the answers are different from one another, whereas the test set only contains answers for FCE.
-\begin{table}[]
+Table \ref{tab:tr-stat} and \ref{tab:te-stat} gives the statistic of the character counts of the documents in the training and test set respectively.
+As can be seen, there is a much larger variance in the training set than in the test set.
+This is due to the fact that the training set contains answers for 15 different exams, where the expected length of the answers is different from one another, whereas the test set only contains answers for FCE.
+\begin{table}[h]
 \centering
 \caption{Statistics of the Character Length of Documents in Training Set}
 \label{tab:tr-stat}
@@ -61,7 +60,7 @@ Average & 742.1   \\ \hline
 Standard Deviation    & 716.4   \\ \hline
 \end{tabular}
 \end{table}
-\begin{table}[]
+\begin{table}[h]
 \centering
 \caption{Statistics of the Character Length of Documents in Test Set}
 \label{tab:te-stat}
@@ -76,4 +75,4 @@ Standard Deviation    & 186.8    \\ \hline
 \end{table}
 
 From the training set, we took 300 examples to create a validation set.
-The error rate on the validation set is computed after each epoch, and was used to see the length of training which does not make the model to underfit or overfit to the remaining 2700 examples.
+The error rate on the validation set is computed after each epoch and was used to see the length of training which does not make the model to underfit or overfit to the remaining 2700 examples.

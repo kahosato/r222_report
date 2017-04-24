@@ -1,54 +1,59 @@
 
-\begin{table*}[]
+\begin{table*}[h]
 \centering
-\caption{Error Rate of Models with Input Size 1014}
+\caption{Accuracy of Models with Input Size 1014}
 \label{tab:1014}
 \begin{tabular}{cccc}
-& Random Window Sampling & Augmentation  & Error Rate \\ \hline
-(A)& No                     & Yes                & 0.648      \\
-(B)& No                     & No                 &0.664     \\
-(C)& Yes                     & Yes                &  0.640    \\
-(D)& Yes                    & No                 & 0.626
+& Random Window Sampling & Augmentation  & Accuracy \\ \hline
+(A)& No                     & Yes                & 0.352      \\
+(B)& No                     & No                 &0.336     \\
+(C)& Yes                     & Yes                &  0.360    \\
+(D)& Yes                    & No                 & 0.374 \\
+\texttt{majority} & N/A & N/A & 0.345 \\
+\texttt{simple SVM} & N/A & N/A & 0.613
 \end{tabular}
 \end{table*}
-Table \ref{tab:1014} shows the error rate of the CNN with the input size 1014.
+Table \ref{tab:1014} shows the accuracy of the baselines and the CNN with the input size 1014.
 Model (A) is the unmodified implementation described in \citep{zhang2015character}.
 As described in Section \ref{sub:input}, we modify the implementation in two ways; one is applying the random window sampling, and the other is switching off the data augmentation using a thesaurus.
 
-The error rate of a simple baseline system which chooses the label arbitrarily is $0.667$. 
-All the models perform better than the baseline though only by a small margin.
+Model (A), (C), and (D) perform better than the \texttt{majority} baseline, though only by a small margin.
+\texttt{simple SVM} outperforms all the other systems.
 
-As can be seen in the table, (D) outperforms all the other models, showing the effectiveness of the two modifications.
-As stated previously, this CNN is shown effective for sentiment analysis and topic categorisation \citep{zhang2015character}.
+Model (D) outperforms all the other CNN models, showing the effectiveness of the two modifications.
 
 We argue that random window sampling is an effective data augmentation method for this task.
-In \citep{zhang2015character}, the types of documents treated are reviews or articles, and the first part of these documents tend to be more informative about the overall content which is the objective of the network.
-Using only the start of the document therefore means less noise in the training data for the problems discussed in \citep{zhang2015character}.
-However, in the context of NLI, there is no clear relation between the informative features and the locations.
-Therefore it could be useful to augment the small dataset with random window sampling, rather than discarding a possibly useful information which may be contained in the later part of the training example.
+As stated previously, this CNN is shown effective for sentiment analysis and topic categorisation \citep{zhang2015character}.
+In \citep{zhang2015character}, the types of documents treated are reviews or articles, and the first part of these documents tend to be more informative about the overall semantics of the documents which is the objective of the task.
+Using only the start of the document, therefore, means less noise in the training data for the problems discussed in \citep{zhang2015character}.
+However, in the context of NLI, there is no clear relation between the informativeness of a feature and its location.
+Therefore, it is useful to augment the small dataset with random window sampling, rather than discarding possibly useful information which may be contained in the later part of the training example.
 
-A possible explanation of (A) performing better than (B) is that augmentation using thesaurus helps generalise the bias introduced by using only the first part of the document.
-The bias may be related to the topic of the document or to the format that the exam prompt asks for.
-There is an imbalance in the exams taken by native speakers of each language, and therefore there may be a prompt on a certain topic or asks for a certain format which was chosen more frequently by a learners of a certain L1. 
-Clearly, if a network learns to classify based on the topic or the format, it would not generalise and perform poorly on the test set.
+A possible explanation of model (A) performing better than model (B) is that the data augmentation using a thesaurus helps counteract  the bias introduced by using only the first part of the document.
+This bias may be related to, for instance, the topic of the document or to the format that the exam prompt asks for.
+There is an imbalance in the exams taken by native speakers of each language.
+This means that there may be a prompt on a particular topic or asks for a particular format which was chosen more frequently by learners of a certain L1. 
+Clearly, if a network learns to classify based on the topic or the format of the document, it would not generalise and perform poorly on the test set.
 As mentioned previously, the first part of the document may contain more information about the topic, and it possibly is more affected by the format.
 For instance, there are many documents which are in the format of a letter.
-These always start with a greeting (e.g. Dear ...), and if there are more of such documents are present for a certain L1, the network may associate the greeting with this L1, which would not generalise.
+These always start with a greeting (e.g. Dear ...), and if there are more of such documents present for a certain L1, the network may associate the greeting with this L1.
 
-\begin{table}[]
+\begin{table}[h]
 \centering
-\caption{Error Rate of Models with Random Window Sampling}
+\caption{Accuracy of Models with Random Window Sampling}
 \label{tab:r_w_s}
 \begin{tabular}{ccc}
-&Input Size & Error Rate \\ \hline
-(D)&123        & 0.578      \\
-(E)&339        & 0.632      \\
-(F)&555        & 0.654      \\
-(G)&771        & 0.682      \\
-(C)&1014       & 0.626    
+&Input Size & Accuracy \\ \hline
+(D)&123        & 0.422      \\
+(E)&339        & 0.368      \\
+(F)&555        & 0.346      \\
+(G)&771        & 0.318      \\
+(C)&1014       & 0.374    \\
+\texttt{majority}  & N/A & 0.345 \\
+\texttt{simple SVM} & N/A & 0.613 
 \end{tabular}
 \end{table}
-\begin{table}[]
+\begin{table}[h]
 \centering
 \caption{Proportion of Examples with Padding}
 \label{tab:padding}
@@ -61,8 +66,9 @@ Input Size & Training & Test \\ \hline
 1014       & 74.3\%    &33.6\%
 \end{tabular}
 \end{table}
-Table \ref{tab:r_w_s} shows the result for a different window size.
-Again, all the models except for (G) perform better than the simple baseline system only by small margin.
+Table \ref{tab:r_w_s} shows the accuracies of the model with different window sizes.
+Again, all the models except for model (G) perform better than the \texttt{majority} baseline system, though only by small margin.
+\texttt{simple SVM} outperforms all the other systems by the large margin.
 
 Interestingly, the best performances were achieved with the smallest and the largest window size.
 This suggests that there is a trade-off between a small and a large window.
@@ -70,13 +76,30 @@ Intuitively, having a large window would mean that the network is fed with more 
 It, however, also means that the network is fed with more padding.
 Table \ref{tab:padding} shows the proportion of examples which are padded in each dataset.
 As can be seen, with a window size larger than 123, a large proportion of the training set is padded.
-Though the padding itself potentially introduces some noise, it affected the network less with the window size 1014, perhaps because also many examples in the test set was padded.
+Though the padding itself potentially introduces some noise, it affected the network less with the window size 1014, perhaps because also many examples in the test set were padded.
 As a future work, one may filter short examples which require padding from training set and see whether the performance improves.
 
+\begin{table}[t]
+\centering
+\caption{Confusion Matrix of Model (D)}
+\label{tab:conf}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{}} & \multicolumn{3}{c|}{predicted} \\ \cline{3-5} 
+\multicolumn{2}{|c|}{}                  & IT        & RU      & JP       \\ \hline
+\multirow{3}{*}{\rotatebox[origin=c]{90}{label}}      & IT     & 43      & 74     & 35      \\ \cline{2-5} 
+                               & RU     & 22        & 95    & 47      \\ \cline{2-5} 
+                               & JP     & 18        & 79      & 63     \\ \hline
+\end{tabular}
+\end{table}
+Table \ref{tab:conf} shows the confusion matrix for model (D).
+As can be seen, a large proportion of documents are labelled with Russian.
+This is perhaps due to features learnt to be characteristic of Russian speakers writing was something that occur often in English writing in general.
+
 A possible explanation to a large difference between the performance of the CNN applied to this task and the tasks introduced in \citep{zhang2015character} is the size of dataset.
-The smallest dataset \cite{zhang2015character} experiment with consists of 120k training examples equally split between four classes, which is significantly larger than our dataset.
-\cite{zhang2015character} also states that convolutional networks, especially when learning from low-level raw features (i.e. characters).
-On the contrary, \cite{stab2017recognizing} uses a convolutional network to classify arguments as sufficient or not.
-With just over 1000 examples, the error rate of their network is $0.157 \pm 0.025$, which is much lower than that of the majority baseline, which is $0.338 \pm 0.033$.
-This network takes word embeddings produced with word2vec \citep{mikolov2013distributed}.
-Though lexical features are not considered to be appropriate for the task of NLI as stated previously, for a future work it may be worth investigating the use of word-based CNN for NLI.
+\cite{zhang2015character} states that convolutional networks, especially when learning from low-level raw features (i.e. characters) requires a large-scale dataset, and the smallest dataset \cite{zhang2015character} experiment with consists of 120k training examples with equal splits between four classes.
+This is significantly larger than our dataset.
+\cite{stab2017recognizing}, however, uses a convolutional network trained only on 1029 examples and achieve the accuracy $0.843 \pm 0.025$ on the task of classifying arguments as sufficient or not.
+This is much higher than that of their majority baseline, which is $0.662 \pm 0.033$.
+This network takes word embeddings produced using word2vec \citep{mikolov2013distributed}.
+Though lexical features are not considered to be appropriate for the task of NLI as stated previously, as a future work it may be worth investigating the use of word-based CNN for NLI.

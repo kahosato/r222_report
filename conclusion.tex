@@ -1,9 +1,11 @@
-In this report we investigated whether a CNN designed by \cite{zhang2015character} is effective for NLI.
-Though it did perform better the baseline system, the improvement was minuscule. 
-We experimented with two modifications to their implementation. One is to switch off the data augmentation using thesaurus, and the other is to use random window sampling.
-Each modification alone gave no improvement, but when both were applied the error rate went down by 2.2\%.
+In this report, we investigated whether a character-based CNN designed by \cite{zhang2015character} is effective for NLI.
+Though it did perform better than \texttt{majority} baseline system, the improvement was minuscule. 
+We experimented with two modifications to their implementation.
+One is to switch off the data augmentation using thesaurus, and the other is to use random window sampling.
+Each modification alone gave no improvement. 
+However, when both modifications were applied, the accuracy went up by 2.2\% with input size 1014.
 
-We also experimented with a various window sizes, and found that the smallest window size performed the best. This gave an improvement of 8.9\% to the baseline, and 7.0\% to the original implementation by \cite{zhang2015character}.
+We also experimented with a various window sizes and found that the model which used the window of size 123 performed the best. This gave an improvement of 7.7\% to the \texttt{majority} baseline and 7.0\% to the original implementation by \cite{zhang2015character}.
 
-As no existing work in NLI uses the same dataset, we can not compare the performance directly.
-However, a very simple SVM gives a good performance for different corpora, and it is expected that it would outperform any of the models discussed in this report. 
+However, \texttt{simple SVM} outperforms all the CNN models.
+As a future work one may experiment with word-based CNN or the dataset where short documents are filtered out.

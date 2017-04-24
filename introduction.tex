@@ -1,26 +1,27 @@
-There is an increasing interest in \emph{Native Language Identification} (NLI).
+There is an increasing interest in \emph{native language identification} (NLI).
 NLI is a task of detecting the native language (L1) of the author of the text.
-This may be treated as a sub-task of \emph{author profiling}, where the goal is to predict traits of the author such as gender, age or psychometric traits  \citep{estival2007author}.
-Author profiling is used, for instance, to narrow down the suspects of criminal activities \citep{abbasi2005applying} by filtering them with the attributes detected from the communication on online mediums.
-A possible commercial application is to collect customer information from the reviews for market intelligence \citep{glance2005deriving}, which could be especially effective when used in conjunction with sentiment analysis.
+This may be treated as a sub-task of \emph{author profiling}, where the goal is to predict traits of the author such as gender, age, or psychometric traits  \citep{estival2007author}.
+Author profiling is used, for instance, to narrow down a list of suspects of criminal activities \citep{abbasi2005applying} by filtering it with the traits detected from the communication on online mediums.
+A possible commercial application of author profiling is collection of customer information from the reviews for market intelligence \citep{glance2005deriving}, which could be especially effective when used in conjunction with sentiment analysis.
 
-On the top of these applications, NLI can be used to create a better writing tutor system a non-native speaker of English.
+In addition to these applications of author profiling, NLI can be used to create a better writing tutor system for a non-native speaker of English.
 When using a non-native language (L2), one often applies the knowledge of their L1.
-This well-studied phenomenon is called \emph{L1 transfer}\citep{wanner1982language, frenck1997syntactic, dussias2003syntactic, nitschke2010first}.
-L1 transfer could result to correct expressions, but could also lead to errors which are specific to the particular L1. 
-Based on this observation, there are several works \citep{chang2008automatic, rozovskaya2010generating, rozovskaya2011algorithm, dahlmeier2011correcting} which investigate how the knowledge of the authors' first language could improve the grammatical error detection and correction in their texts.
-A writing tutor system can first used NLI, and use the detected L1 to have an improved error detection and correction.
+This well-studied phenomenon is called \emph{L1 transfer} \citep{wanner1982language, frenck1997syntactic, dussias2003syntactic, nitschke2010first}.
+L1 transfer could result to correct use of the language, but could also lead to errors which are specific to the L1.
+There are several works which are based on this observation and investigate how the knowledge of the authors' L1 could improve the grammatical error detection and correction in their texts \citep{chang2008automatic, rozovskaya2010generating, rozovskaya2011algorithm, dahlmeier2011correcting}.
+A writing tutor system can first use NLI, and use the detected L1 to have an improved error detection and correction.
 
-There have been many works on NLI.
+NLI has been extensively studied in the past decade.
 Early works in NLI \citep{koppel2005determining, tsur2007using} showed the effectiveness of Support Vector Machine (SVM) in this task.
 SVM continues to be the popular choice, and 13 out of 24 participating teams, including the winning team  \citep{jarvis2013maximizing} in the First Native Language Identification Shared Task  \citep{tetreault2013report} utilised SVM.
 The difference among these works comes down to the feature sets used, which range from lexical n-grams \citep{koppel2005determining, tsur2007using, jarvis2013maximizing} to fragments of Tree Substitutional Grammar  \citep{swanson2012native}.
-In other words, feature engineering has been a large focus of NLI.
+In other words, feature engineering has been a large focus in the field of NLI.
 
-In this report, we perform NLI on the subset of Cambridge Learner Corpus  \citep{nicholls2003cambridge, yannakoudakis2011new} using a character-based Convolutional Neural Network (CNN).
-Specifically, we use the character-based CNN designed by \cite{zhang2015character} to perform various classification tasks.
-We chose to use a character-based CNN as opposed a word-based CNN, as lexical features are in general considered to be more appropriate for the task of topic categorisation than of author profiling  \citep{kochmar2011identification}.
-CNNs have gained in popularity for its success in various practical applications, such as image recognition \citep{krizhevsky2012imagenet, simonyan2014very, he2016deep}, natural language processing \citep{jackson2007natural, collobert2011natural, kalchbrenner2014convolutional} and playing Go \citep{silver2016mastering}.
+In this report, we perform NLI on a subset of Cambridge Learner Corpus  \citep{nicholls2003cambridge, yannakoudakis2011new} using a character-based convolutional neural network (CNN).
+Specifically, we use the character-based CNN designed to perform various classification tasks, presented by \cite{zhang2015character}.
+We chose to use a character-based CNN as opposed to a word-based CNN, as lexical features are in general considered to be more appropriate for the task of topic categorisation than of author profiling  \citep{kochmar2011identification}.
+CNNs have gained in popularity for its success in various practical applications, such as image recognition \citep{krizhevsky2012imagenet, simonyan2014very, he2016deep}, natural language processing \citep{jackson2007natural, collobert2011natural, kalchbrenner2014convolutional}, and playing Go \citep{silver2016mastering}.
+
 CNNs have a great advantage over traditional machine learning techniques such as SVM, which is the lack of feature engineering.
 The downside is that they typically require a large-scale dataset, and the dataset we have is fairly small.
 Indeed, applying the implementation by  \cite{zhang2015character} with no modification to the dataset does not perform better than a simple baseline system which assigns the label arbitrarily.
@@ -28,8 +29,9 @@ Another potential explanation for the poor performance is the length of each doc
 \cite{zhang2015character} uses the first 1014 characters of each document as an input.
 However, many of the documents are shorter than 1014 characters and therefore require padding.
 This may have introduced some noise to the input.
-To partially mitigate these problems, we use a smaller window and sample a section of the document randomly, rather than always taking the first part.
+
+To partially mitigate these problems, we use a smaller window and sample a section of the document at an arbitrary location, rather than always taking the first part.
 The results show that CNN performs better with a small window size.
 However, the performance still does not match that of SVM.
 
-The remaining of the report proceeds as follows; Section 2 briefly discusses the previous works in NLI; Section 3 introduces the convolution used in the CNN we experiment with; Section 4 discusses the dataset we perform NLI on; Section 5 describes the design of the CNN by \cite{zhang2015character} and the modification we apply; Section 6 presents the results and attempts to analyse them; Finally, Section 7 gives a brief summary of the report.
+The remaining of the report proceeds as follows; Section 2 briefly discusses the previous works in NLI; Section 3 gives the convolution used in the CNN we experimented with; Section 4 discusses the dataset we perform NLI on; Section 5 describes the models we experimented with; Section 6 presents and discusses the results; Finally, Section 7 gives a brief summary of the report.
